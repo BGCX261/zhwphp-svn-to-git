@@ -1,0 +1,262 @@
+js设置打印参数
+<Script   defer>     
+      function   SetPrintSettings()   {     
+      //   --   advanced   features     
+      factory.printing.SetMarginMeasure(2)   //   measure   margins   in   inches     
+      factory.SetPageRange(false,   1,   3)   //   need   pages   from   1   to   3     
+      factory.printing.printer   =   "HP   DeskJet   870C"  //打印机选择   
+      factory.printing.copies   =   2                     //打印份数
+      factory.printing.collate   =   true     
+      factory.printing.paperSize   =   "A4"     //纸张设置
+      factory.printing.paperSource   =   "Manual   feed"     
+          
+      //   --   basic   features     
+      factory.printing.header   =   "This   is   MeadCo"     //页眉设置
+      factory.printing.footer   =   "Advanced   Printing   by   ScriptX"     //页脚设置
+      factory.printing.portrait   =   false     
+      factory.printing.leftMargin   =   1.0     //左边距
+      factory.printing.topMargin   =   1.0     //上边距
+      factory.printing.rightMargin   =   1.0     //右边距
+      factory.printing.bottomMargin   =   1.0     //下边距
+      }
+</script>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+用JS进行网页打印设置 
+来源：本站原创 作者：管理员 发布日期：2009-10-15 17:22:20 人气：486 
+
+  
+下面JS代码无需修改：
+<script language="javascript">
+function doPage()
+{
+layLoading.style.display = "none";//同上
+}
+
+//设置网页打印的页眉页脚为空
+function PageSetup_Null()
+{
+try
+{
+var Wsh=new ActiveXObject("WScript.Shell");
+HKEY_Key="header";
+Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,"");
+HKEY_Key="footer";
+Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,""); 
+}
+catch(e){}
+}
+
+//设置网页打印的页眉页脚为默认值
+function PageSetup_Default()
+{ 
+try
+{
+var Wsh=new ActiveXObject("WScript.Shell");
+HKEY_Key="header";
+Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,"&w&b页码,&p/&P");
+HKEY_Key="footer";
+Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,"&u&b&d");
+}
+catch(e){}
+}
+/**//*
+35*预览函数
+36*controlsList 要隐藏的控件
+37*doType 页面页脚类型 0 设置为空，1 设置为默认
+38*/
+function printpr(controlsList,doType) 
+{
+if(doType == '0'){
+PageSetup_Null();
+}
+else{
+PageSetup_Default();
+}
+var control = controlsList.split(",");
+for(i = 0;i < control.length;i++){//隐藏控件
+document.getElementById(control[i]).style.display = "none";
+}
+var OLECMDID = 7;
+var PROMPT = 1;
+var WebBrowser = '<OBJECT ID="WebBrowser1" WIDTH=0 HEIGHT=0 CLASSID="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></OBJECT>';
+document.body.insertAdjacentHTML('beforeEnd', WebBrowser);
+WebBrowser1.ExecWB(OLECMDID, PROMPT);
+WebBrowser1.outerHTML = "";
+for(i = 0;i < control.length;i++){//打印之后将该元素显示出来
+document.getElementById(control[i]).style.display = "";
+}
+window.location.reload();//刷新窗口
+}
+
+/**//*
+64*预览函数
+65*controlsList 要隐藏的控件（用逗号连接）
+66*doType 页面页脚类型 0 设置为空，1 设置为默认
+67*/
+function printTure(controlsList,doType) //打印函数
+{ 
+if(doType == '0'){
+PageSetup_Null();
+}
+else{
+PageSetup_Default();
+}
+var control = controlsList.split(",");
+for(i=0;i<control.length;i++){//隐藏控件
+document.getElementById(control[i]).style.display = "none";
+}
+window.print();
+for(i=0;i<control.length;i++){
+document.getElementById(control[i]).style.display = "";
+}
+window.location.reload();
+}
+</script>
+<script language="javascript">
+var HKEY_Root,HKEY_Path,HKEY_Key;
+HKEY_Root="HKEY_CURRENT_USER";
+HKEY_Path="\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
+</script>
+
+测试页面：
+<html>
+<head><title>测试JS控制打印</title></head>
+<script type="text/javascript" src="test.js"></script>
+<script language="javascript">
+var HKEY_Root,HKEY_Path,HKEY_Key;
+HKEY_Root="HKEY_CURRENT_USER";
+HKEY_Path="\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
+</script>
+<body>
+我是中国人，我热爱我的祖国！
+<input type="button" name="btn" value="打印" onclick="printTure('btn,show','0')"/>
+<input type="button" name="show" value="预览" onclick="printpr('btn,show','0')"/>
+</body>
+</html>
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+WebBrowser控件
+同其他控件一样，首先我们需要在页面中嵌入WebBrowser控件，不过由于该控件是IE浏览器自带的，支持浏览器默认安全设置，因此避免了安全性设置的麻烦。对于IE7及以上安全性要求更高的浏览器，您或许还是需要自定义IE的安全性级别。
+<OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" id="wb" width="0" height="0"></OBJECT>
+下面就是该控件涉及打印的功能调用，用户可以在JavaScrip中调用：
+wb.execwb(6,1); //打印，打印当前页面
+wb.execwb(7,1); //打印预览
+wb.execwb(8,1); //打印设置，调出系统打印设置对话框
+
+3.页眉、页脚设置:打印时，有的需要去掉页眉页脚，或替换成自已想要的。
+<script language="JavaScript">
+    var hkey_root,hkey_path,hkey_key;
+    hkey_root="HKEY_CURRENT_USER";
+    hkey_path="\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
+    //配置网页打印的页眉页脚为空
+    function pagesetup_null(){   
+        try{
+            var RegWsh = new ActiveXObject("WScript.Shell");           
+            hkey_key="header";           
+            RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"");
+            hkey_key="footer";
+            RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"");
+            //&b 第&p页/共&P页 &b
+        }catch(e){}
+    }
+    //配置网页打印的页眉页脚为默认值
+    function pagesetup_default(){
+        try{
+            var RegWsh = new ActiveXObject("WScript.Shell");
+            hkey_key="header";
+            RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"&w&b页码，&p/&P")
+            hkey_key="footer";
+            RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"&u&b&d");
+        }catch(e){}
+    }
+...
+</script>
+
+[源码例子]:
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>打印设置</title>
+<link rel="stylesheet" media="screen" type="text/css" href="http://www.chinasvf.com/Webs/public/default/css/bank.css" />
+<!-- 打印样式 -->
+<link rel="stylesheet" media="print" type="text/css" href="http://www.chinasvf.com/Webs/public/default/css/bankprint.css" />
+<script language="JavaScript">
+    var hkey_root,hkey_path,hkey_key;
+    hkey_root="HKEY_CURRENT_USER";
+    hkey_path="\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
+    //配置网页打印的页眉页脚为空
+    function pagesetup_null(){   
+        try{
+            var RegWsh = new ActiveXObject("WScript.Shell");           
+            hkey_key="header";           
+            RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"");
+            hkey_key="footer";
+            RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"");
+            //&b 第&p页/共&P页 &b
+        }catch(e){}
+    }
+    //配置网页打印的页眉页脚为默认值
+    function pagesetup_default(){
+        try{
+            var RegWsh = new ActiveXObject("WScript.Shell");
+            hkey_key="header";
+            RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"&w&b页码，&p/&P")
+            hkey_key="footer";
+            RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"&u&b&d");
+        }catch(e){}
+    }   
+     //打印选区内容
+    function doPrint() {
+        pagesetup_null();
+        bdhtml=window.document.body.innerHTML; 
+        sprnstr="<!--startprint-->"; 
+        eprnstr="<!--endprint-->"; 
+        prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17); 
+        prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); 
+        window.document.body.innerHTML=prnhtml; 
+        window.print(); 
+    }
+    //打印页面预览
+    function printpreview(){
+        pagesetup_null();
+        //wb.printing.header = "居左显示&b居中显示&b居右显示页码，第&p页/共&P页";
+        //wb.printing.footer = "居左显示&b居中显示&b居右显示页码，第&p页/共&P页";
+        try{
+            wb.execwb(7,1);
+        }catch(e){
+            alert("您的浏览器不支持此功能,请选择'文件'->'打印预览'");
+        }
+    }
+    //打印
+    function prints(){
+        pagesetup_null();
+        //wb.printing.header = "居左显示&b居中显示&b居右显示页码，第&p页/共&P页";
+        //wb.printing.footer = "居左显示&b居中显示&b居右显示页码，第&p页/共&P页";
+        try{
+            wb.execwb(6,1);
+        }catch(e){
+            alert("您的浏览器不支持此功能");
+        }
+    }
+</script>
+</head>
+<body>
+<OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" id="wb" width="0" height="0"></OBJECT>
+<div id="bankwrap">
+  <div class="Noprint"><a href="http://www.chinasvf.com" style="cursor:pointer; color:#0000FF">返回首页</a></div>
+  <div style="text-align:right">
+    <p class="Noprint">
+        <span style="cursor:pointer; color:#0000FF" onclick="javascript:window.open('http://www.chinasvf.com/Webs/Share/printhelp')" class="Noprint">打印帮助</span>
+        <span style="cursor:pointer; color:#0000FF" onclick="printpreview();">打印预览</span>
+        <span style="cursor:pointer; color:#0000FF" onclick="prints();" class="Noprint">打印</span>
+    </p>
+  </div>
+  <div class="banktitle">内容</div>
+</div>
+</body>
+</html>

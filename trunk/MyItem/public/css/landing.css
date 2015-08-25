@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* 2010-3-30 by 佛哥 www.hifoge.com QQ:313223944 */
+/*总体样式*/
+*{ margin:0;padding:0;}
+body{font:12px Arial, Helvetica, sans-serif; background-color:#016aa9; }
+img{border:none;}
+.kong{clear:both;}
+img {border:0;} 
+a {font:12px Arial, Helvetica, sans-serif; text-decoration:none; color:#000; } /*链接颜色修改*/
+a:hover {text-decoration:none; color:#333; }
+a { hide-focus: expression( this.hideFocus=true ); outline: none;}
+.red{ color:#F00;}
+#box{margin:0 auto; width:962px;}
+#top1{ width:962px; height:141px; background:url(../images/admin/log1.gif) no-repeat;}
+#top2{ width:962px;	height:84px;  background:url(../images/admin/log2.gif) no-repeat;}
+
+/*10字标题属性修改*/
+#top2 h1{ 
+	font-size:25px; 
+	text-align:center; 
+	padding-top:35px; 
+	color:#fff; 
+	font-family:"楷体"; 
+
+}
+
+/*15字标题属性修改*/
+#top2 h2{ 
+	text-align:center; 
+	padding-top:38px; 
+	color:#fff;
+	display:none;
+}
+
+#top3 .t1{ width:378px; height:103px; background:url(../images/admin/log3.gif) no-repeat; float:left;}
+#top3 .t2{ width:252px; height:103px; background:url(../images/admin/log4.gif) no-repeat; float:left;}
+#top3 .t3{ width:332px; height:103px; background:url(../images/admin/log5.gif) no-repeat; float:left;}
+
+#down{ clear:both;}
+#down .d1{ width:962px;	height:50px; background:url(../images/admin/log6.gif) no-repeat;}
+#down .d2{ width:962px;	height:52px; background:url(../images/admin/log7.gif) no-repeat;}
+
+/*登陆框属性*/
+#top3 .t2 table{width:195px;color:#FFF;font-size:12px;height:100px;}
+#top3 .t2 table td{ height:22px; vertical-align:text-top;}
+#top3 .t2 table .tab1{ width:50px; text-align:right;}
+#top3 .t2 table .tab2{ width:120px;}
+#top3 .t2 table .tab2 input{ width:105px; margin-left:8px; border:1px solid #86cbe2; background-color:#292929;color:#FFF;}
+
+#top3 .t2 table .tab3{}
+#top3 .t2 table .tab3 input{ width:50px; margin-left:8px; border:1px solid #86cbe2;background-color:#292929; color:#FFF; float:left;}
+#top3 .t2 table .tab3 img{ width:50px; height:20px; text-align:right; padding-right:25px; float:left; margin-left:2px;}
+#top3 .t2 table .tab-img input{ text-align:right; margin-left:5px;}
+
+
+
+
+
+
+

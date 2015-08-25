@@ -1,0 +1,28 @@
+<?php
+// 文件到本地
+	public function downloadFile($url){
+		$url = trim($url);
+		if($this->Rules['local']){
+			$fileArr      = @get_headers($url,true);
+			$filesize     = $this->Rules['imgsize']?$this->Rules['imgsize']:'15'; // 文件大小
+			if($filesize < @ceil($fileArr['Content-Length']/1024)){
+				$type     = substr($url,strrpos($url,".")+1);                 // 获取文件后缀
+				$dir      = $this->basic['file']['pathimg'].date("ymd").'/';  // 设置文件路径
+				$filename = $dir.md5($url).'.'.$type;                         // 生成新的文件名
+				if(!is_file($seavfile =  bizm.$filename)){
+					if(!is_dir(bizm.$dir)) $this->CreateDir(bizm.$dir);                     // 创建目录
+					$cp       = curl_init($url);
+					$fp       = fopen($seavfile, "a");
+					curl_setopt($cp, CURLOPT_FILE, $fp);
+					curl_setopt($cp, CURLOPT_HEADER, 0);
+					curl_setopt($cp, CURLOPT_FOLLOWLOCATION , true); // 处理跳转
+					curl_exec($cp);
+					curl_close($cp);
+					fclose($fp);
+				}
+				return $filename;
+			}
+		}else return $url;
+	}
+
+?>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title></title>
+<script type="text/javascript">
+window.onload = function()
+{
+    var h = document.getElementById('menu').getElementsByTagName('h3');
+    for(var i=0;i<h.length;i++)
+    {
+        var x = h[i].childNodes[0];
+        addEvent(x,i);
+    }
+}
+function addEvent(object,i)
+{
+    if (window.attachEvent) object.attachEvent('onclick',function(){showMenu(i)});
+    else object.addEventListener('click',function(){showMenu(i)},false)
+}
+function showMenu(num)
+{
+    var x = document.getElementById('menu').getElementsByTagName('ul');
+    if (x[num].style.display == 'none') x[num].style.display = 'block';
+    else x[num].style.display = 'none';
+}
+</script>
+</head>
+<body>
+
+<div id="menu">
+    <h3><a>新闻管理1</a></h3>
+	<ul>
+		<li><a href="">国内</a></li>
+		<li><a href="">国外</a></li>
+	</ul>
+	
+	<h3><a>新闻管理2</a></h3>
+	<ul>
+		<li><a href="">国内</a></li>
+		<li><a href="">国外</a></li>
+	</ul>
+</div>
+
+</body>
+</html>

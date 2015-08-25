@@ -1,0 +1,1 @@
+2010-09-09  在JS中，使用form的submit()和reset()方法，触发事件的对象的name不能对应为submit和reset

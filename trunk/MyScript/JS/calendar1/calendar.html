@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Js 日期选择</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<style> 
+body{font-size:12px;font-family:Verdana,Arial,"宋体";}
+a:link {color:#464646;text-decoration:none;}
+a:visited {color:#464646;text-decoration:none;}
+a:hover{color:#ed145b;text-decoration:underline;}
+a:active{color:#ed145b;text-decoration:underline;}
+td{font-size:12px}
+</style>
+
+<script> 
+var ie =navigator.appName=="Microsoft Internet Explorer"?true:false;
+function $(objID){
+return document.getElementById(objID);
+}
+</script>
+</head>
+<body>
+<script type="text/javascript" src="calendar.js"></script>
+ 选择日期：<input name="member.birth"  type="text" value="" size="16" style="border:1px solid #666" readonly="readonly" onclick="showcalendar(event, this);" onfocus="showcalendar(event, this);if(this.value=='0000-00-00')this.value=''" />
+ 
+<!--#
+选择日期2：<input id="dateaa" name="member.birth"  type="text" value="" size="16" readonly="readonly" onfocus="if(this.value=='0000-00-00')this.value=''" /><img src="date.gif" onclick="showcalendar(event, dateaa);" />
+-->
+</body>
+</html>

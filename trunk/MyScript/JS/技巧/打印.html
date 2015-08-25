@@ -1,0 +1,135 @@
+<?php
+var hkey_root,hkey_path,hkey_key
+
+hkey_root="HKEY_CURRENT_USER"
+
+hkey_path="\\Software\\Microsoft\\Internet Explorer\\PageSetup\\"
+
+// 设置页眉页脚为空
+
+function PageSetup_Null()
+
+{
+
+try{
+
+var RegWsh = new ActiveXObject("WScript.Shell") ;
+
+hkey_key="header" ;
+
+RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"") ;
+
+hkey_key="footer" ;
+
+RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"") ;
+
+}
+
+catch(e){}
+
+}
+
+// 设置页眉页脚为默认值
+
+function PageSetup_Default()
+
+{
+
+try{
+
+var RegWsh = new ActiveXObject("WScript.Shell") ;
+
+hkey_key="header" ;
+
+RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"&w&b页码，&p/&P") ;
+
+hkey_key="footer" ;
+
+RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"&u&b&d") ;
+
+}
+
+catch(e){}
+
+}
+
+// 打印
+
+function PrintPage()
+
+{
+
+PageSetup_Null() ;
+
+window.print() ;
+
+// PageSetup_Default() ;
+
+}
+
+document.write('<style media=print>' );
+
+document.write('.Noprint{display:none;}');//用本样式在打印时隐藏非打印项目
+
+document.write('.PageNext{page-break-after: always;}');//控制分页
+
+document.write('</style>');
+
+document.write('<object id=WebBrowser width=0 height=0 classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2>');
+
+document.write('</object>');
+
+document.write('<center class=Noprint>');
+
+document.write('<input type=button value=打印 onclick=PrintPage()>');
+
+document.write('<input type=button value=页面设置 onclick=document.all.WebBrowser.ExecWB(8,1)>');
+
+document.write('<input type=button value=打印预览 onclick=document.all.WebBrowser.ExecWB(7,1)>');
+
+document.write('<Font color=\"#FF0000\">具体打印设置请联系技术部</Font>');
+
+document.write('</center>');
+
+[/PHP]
+
+
+//一段实现网络打印的代码
+
+<?php
+
+$handle = printer_open(、、192.168.1.1+网络打印机名);
+
+printer_start_doc($handle, "My Document");
+
+printer_start_page($handle);
+
+$pen = printer_create_pen(PRINTER_PEN_SOLID, 2, "000000");
+
+printer_select_pen($handle, $pen);
+
+$brush = printer_create_brush(PRINTER_BRUSH_CUSTOM, "c:\\brush.bmp");
+
+printer_select_brush($handle, $brush);
+
+printer_draw_rectangle($handle, 1, 1, 500, 500);
+
+printer_delete_brush($brush);
+
+$brush = printer_create_brush(PRINTER_BRUSH_SOLID, "000000");
+
+printer_select_brush($handle, $brush);
+
+printer_draw_rectangle($handle, 1, 501, 500, 1001);
+
+printer_delete_brush($brush);
+
+printer_delete_pen($pen);
+
+printer_end_page($handle);
+
+printer_end_doc($handle);
+
+printer_close($handle);
+
+?>

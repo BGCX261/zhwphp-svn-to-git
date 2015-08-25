@@ -1,0 +1,3 @@
+在HTML页面中，可以存在多个 <script src=></script> 这样的标签来引用JS，只要被引用的JS文件中的内容被访问时，已经通了script标签来引用JS文件，就可以正常使用。
+
+但是在一个.js文件中，使用document.write('<script '); 这样的代码来引用一个JS文件，在此JS文件中，被引用JS文件内容是不可访问的，如果此引用后还存在一个document.write('<script ')，那么后面这个被引用的JS，可以正常访问前一个被引用JS文件的内容

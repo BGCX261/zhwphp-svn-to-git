@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteRule ^index.html index.php
+RewriteRule ^([a-z]+).html$ index.php?act=$1
+RewriteRule ^([a-z]+)-([0-9]+).html index.php?act=$1&id=$2
+RewriteRule ^([a-z]+)-([t]?)([1-3]?).html index.php?act=$1&tid=$3
+RewriteRule ^([a-z]+)-([p]?)([0-9]+).html index.php?act=$1&page=$3

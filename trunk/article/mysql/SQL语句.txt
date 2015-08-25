@@ -1,0 +1,1 @@
+show create table $tablename  显示这个表的创建语句

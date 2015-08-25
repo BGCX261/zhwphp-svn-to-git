@@ -1,0 +1,23 @@
+<script type="text/javascript">
+<!--
+    
+    var focus_width=278
+    var focus_height=175
+    var text_height=24
+    var swf_height = focus_height+text_height
+function clearText (str) {
+    return str.substr(0, str.length - 1);
+}
+    
+    var pics=clearText('http://www.chinaz.com/upimg/100729/_115540151.jpg|http://www.chinaz.com/upimg/100727/_151UW03.jpg|http://www.chinaz.com/upimg/100723/_230010361.jpg|http://www.chinaz.com/upimg/100721/_124I11T.jpg|http://www.chinaz.com/upimg/100719/_1A95c45.jpg|')
+                                     var links=clearText('http://www.chinaz.com/Webbiz/Exp/0H91233A2010.html|http://www.chinaz.com/Webmaster/Club/0HG22V62010.html|http://www.chinaz.com/Webmaster/Club/0H31223042010.html|http://www.chinaz.com/Webmaster/report/0H1121S42010.html|http://www.chinaz.com/Webmaster/Club/0G91213432010.html|')
+                                     var texts=clearText("<font color='#0000FF'>百度: 有益于用户体验的行为都有助于提升权重</font>|<font color='#0000FF'>中国人对不能马上变成钱的东西不会产生兴趣</font>|王建硕：互联网告别2005派 2011年是新春天 |<font color='#FF0000'>2010剑网行动展开 境外服务器侵权同样整顿</font>|<font color='#0000FF'>互联网监管必须为发展 不是阻碍更不是谋利益</font>|")
+                                     document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cabjavascript:void(0)version=6,0,0,0" width="'+ focus_width +'" height="'+ swf_height +'" align="left"  hspace="0">');
+    document.write('<param name="allowScriptAccess" value="sameDomain"><param name="movie" value="pixviewer.swf"><param name="quality" value="high"><param name="bgcolor" value="#F0F0F0">');
+    document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
+    document.write('<param name="FlashVars" value="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'">');
+    document.write('<embed src="./pixviewer.swf" wmode="opaque" FlashVars="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'" menu="false" bgcolor="#F0F0F0" quality="high" width="'+ focus_width +'" height="'+ swf_height +'" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />');
+    document.write('</object>');
+    
+//-->
+   </script>

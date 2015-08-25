@@ -1,0 +1,62 @@
+/ AJAX对象*/
+function getajax(){
+	try{
+		ajax = new ActiveXObject("Microsoft.XMLHTTP");
+		as = 1;
+	}catch(e){
+		try{
+			ajax = new ActiveXObject("Msxml2.XMLHTTP");
+			as = 1;
+		}catch(e){
+			try{ajax = new XMLHttpRequest();
+			as = 2;
+			}catch(e){
+				ajax = null;as = 0;
+			}
+		}
+	}
+}
+// AJAX请求*/
+function doXMLHTTP(GET, url, runfunc){
+	getajax();if(as == 0){
+		alert("Does not support! ");
+	}else{
+		ajax.open(GET, url, runfunc);
+		if(as == 1){
+			ajax.onreadystatechange = runfunc;
+		}else{
+			ajax.onload = runfunc;
+			ajax.onerror = runfunc;
+		}ajax.send(null);
+	}
+}
+// AJAX get返回数据
+function objShow(obj){
+	var htmlcode;
+	if(as == 1){
+		if(ajax.readyState == 4){
+			htmlcode = ajax.responseText;
+			obj.innerHTML = htmlcode;
+		}
+	}else{
+		htmlcode = ajax.responseText;
+		obj.innerHTML = htmlcode;
+	}
+}
+菜坊(493258372)  17:50:53
+// post 方式 AJax提交
+function postAjax(str,url,postString){
+	var ajax = null;
+	if(window.XMLHttpRequest){
+		ajax = new XMLHttpRequest();
+	}else if(window.ActiveXObject){
+		ajax = new ActiveXObject("Microsoft.XMLHTTP");
+	}else return;
+	ajax.open("POST", url , true);
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send(postString);ajax.onreadystatechange = function(){
+		if (ajax.readyState == 4 && ajax.status == 200){
+			$(str).innerHTML  = ajax.responseText;
+		}
+	}
+}

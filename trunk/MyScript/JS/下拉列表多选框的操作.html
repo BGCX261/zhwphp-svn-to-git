@@ -1,0 +1,64 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>JavaScript下拉列表的操作</title>
+
+<script language="JavaScript" type="text/javascript">
+function moveOption(fromSelId,toSelId){
+    //源数据
+    var os=document.getElementById(fromSelId);    
+    //目标数据
+    var ot=document.getElementById(toSelId);
+    for(i=0;i<os.length;i++){
+        if(os.options[i].selected){
+            var o=os.options[i].cloneNode(true);
+            ot.appendChild(o);
+            //os.options.remove(i);
+            os.options[i]=null;
+            i--;
+        }
+    }
+}
+</script>
+
+
+</head>
+
+<body bgcolor="abcdef">
+<form id='saveFormId' name="saveFormName" method="post" action="save.html" >
+
+<table border="1" align="center" width="300">
+<tr>
+    <td colspan="3" align="center">下拉列表操作的演示</td>
+</tr>
+<tr>
+    <td align="center" width="100">
+        <select multiple="multiple" size="10" id="oneSelect" style="width:150px;">
+            <option value="1">第一个理拉框的值1</option>
+            <option value="2">第一个理拉框的值2</option>
+            <option value="3">第一个理拉框的值3</option>
+            <option value="4">第一个理拉框的值4</option>
+        </select>
+    </td>
+    <td align="center" width="100">
+        <input type="button" id="move1" value="-->>" onClick="moveOption('oneSelect','twoSelect')">
+        <br>
+        <input type="button" id="move2" value="<<--" onClick="moveOption('twoSelect','oneSelect')">
+    </td>
+    <td align="center" width="100">
+        <select multiple="multiple" size="10" id="twoSelect" style="width:150px;">
+            <option value="1">第二个理拉框的值1</option>
+            <option value="2">第二个理拉框的值2</option>
+            <option value="3">第二个理拉框的值3</option>
+            <option value="4">第二个理拉框的值4</option>
+        </select>
+    </td>
+</tr>
+</table>
+
+</form>
+
+<div id="showContent" style="font-size:30px;">
+</div>
+</body>
+</html>

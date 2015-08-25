@@ -1,0 +1,36 @@
+// 无限分类的下拉选择
+function moreChoose(str,Array,value,type){
+	var temp   = $(str);
+	var old    = temp.value;
+	var oldt   = old ==""?'Select':(!isNaN(old)?searchArray(Array,old,0,1):old);
+	var lens   = temp.length;
+	var nowArr = '';
+	var n      = 1;
+	var type   = type==1?1:0;
+	if(value == undefined) {
+		nowArr = Array;
+	}else{
+		//  value为直接赋值为数组否则取对应PID
+		value =!isNaN(value)? value :searchArray(Array,value,1,0);
+		nowArr = Array[value];
+	}
+	//  输出值 type = 1为id值 否则为标题*/
+	for(var i=0;i<=lens;i++){
+		temp.options[0]= new Option(oldt,old);
+	};
+	for(var k in nowArr){
+		temp.options[n] = new Option(nowArr[k][1],nowArr[k][type]);	++n;
+	};
+	temp.options[0].selected=true;
+}
+// 无限分类数组查询
+function searchArray(Array,value,str,srt1){
+	var str   = str? str:'0';
+	var srt1  = srt1?srt1:'0';
+	for(k in Array){
+		var arr = Array[k];
+		for( n in arr){
+			if( arr[n][str] == value )return arr[n][srt1];
+		}
+	}
+}
